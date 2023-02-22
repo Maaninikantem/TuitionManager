@@ -26,6 +26,9 @@ public class TuitionManager {
      This method will validate a users input and then add a new student into the roster.
      @param tokens the commands the user inputs.
      */
+    private void addResident(){
+
+    }
     private void addStudent(String[] tokens) {
         String firstName = tokens[1];
         String lastName = tokens[2];
