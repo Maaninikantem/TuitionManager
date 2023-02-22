@@ -3,7 +3,7 @@ import java.util.Scanner;
  This class interprets commands given by the user and manipulates or displays the roster.
  @author Michael Mankiewicz
  */
-public class RosterManager {
+public class TuitionManager {
     private boolean running;
     private Scanner scanner;
     Roster studentRoster = new Roster();
@@ -168,8 +168,17 @@ public class RosterManager {
             case "Q":
                 running = false;
                 break;
-            case "A":
-                addStudent(tokens);
+            case "AR":
+                addResident(tokens);
+                break;
+            case "AN":
+                addNonResident(tokens);
+                break;
+            case "AT":
+                addTristate(tokens);
+                break;
+            case "AI":
+                addInternational(tokens);
                 break;
             case "R":
                 removeStudent(tokens);
@@ -186,8 +195,29 @@ public class RosterManager {
             case "L":
                 printInSchool(tokens);
                 break;
+            case "LS":
+                loadStudents(tokens);
+                break;
             case "C":
                 changeMajor(tokens);
+                break;
+            case "E":
+                enrollStudent(tokens);
+                break;
+            case "D":
+                dropStudent(tokens);
+                break;
+            case "S":
+                awardScholarship(tokens);
+                break;
+            case "PE":
+                printEnrollment(tokens);
+                break;
+            case "PT":
+                printTuition(tokens);
+                break;
+            case "SE":
+                semesterEnd(tokens);
                 break;
             // add more cases to handle other commands
             default:

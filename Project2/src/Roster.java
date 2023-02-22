@@ -53,7 +53,7 @@ public class Roster {
         if(contains(student)){
             return false;
         }
-        int rosterIncrement = 1;
+        int rosterIncrement = 4;
         if(roster == null){
             roster = new Student[rosterIncrement];
         }
@@ -90,10 +90,7 @@ public class Roster {
      @return true if student in roster.
      */
     public boolean contains(Student student){
-        if(find(student) != -1){
-            return true;
-        }
-        return false;
+        return find(student) != -1;
     } //if the student is in roster
     /**
      This method will sort the roster by last name, first name, and date of birth.
