@@ -32,12 +32,12 @@ public class TuitionManager {
     private void addInternational(){
         //bob
     }
-    private void addStudent(String[] tokens) {
+    private void addStudent(String typeOfStudent, String[] tokens) {
         String firstName = tokens[1];
         String lastName = tokens[2];
         String dateOfBirth = tokens[3];
         String majorStr = tokens[4].toUpperCase();
-        Date theDateOfBirth = new Date(dateOfBirth);
+        Major majorMajor = Major.valueOf(majorStr);
         int credits;
         try {
             credits = Integer.parseInt(tokens[5]);
@@ -45,6 +45,19 @@ public class TuitionManager {
             System.out.println("Credits completed invalid: not an integer!");
             return;
         }
+
+        boolean isStudyAbroad = false;
+        String state;
+
+        if(typeOfStudent.equals("tristate")){
+            state = tokens[6].toUpperCase();
+        }
+        if(typeOfStudent.equals("international")){
+            isStudyAbroad = Boolean.parseBoolean(tokens[6]);
+        }
+
+        Date theDateOfBirth = new Date(dateOfBirth);
+
         if (credits < 0) {
             System.out.println("Credits completed invalid: cannot be negative!");
             return;
@@ -62,7 +75,23 @@ public class TuitionManager {
             return;
         }
         Profile newProfile = new Profile(lastName, firstName, theDateOfBirth);
-        Student newStudent = new Student(newProfile, Major.valueOf(majorStr), credits);
+        Student newStudent = null;
+
+        switch(typeOfStudent){
+            case "resident":
+                newStudent = new Resident(newProfile, majorMajor, credits);
+                break;
+            case "nonresident":
+                newStudent = new NonResident(newProfile, majorMajor, credits);
+                break;
+            case "tristate":
+                newStudent = new TriState(newProfile, majorMajor, credits);
+                break;
+            case "international":
+                newStudent = new International(newProfile, majorMajor, credits);
+                break;
+        }
+
         if(studentRoster.add(newStudent)){
             System.out.println(newStudent.getProfile().toString() + " added to the roster.");
         } else {
