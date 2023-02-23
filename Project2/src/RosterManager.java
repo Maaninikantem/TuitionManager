@@ -29,6 +29,9 @@ public class TuitionManager {
     private void addResident(){
 
     }
+    private void addInternational(){
+
+    }
     private void addStudent(String[] tokens) {
         String firstName = tokens[1];
         String lastName = tokens[2];
