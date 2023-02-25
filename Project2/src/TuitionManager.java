@@ -104,17 +104,6 @@ public class TuitionManager {
         String lastName = tokens[2];
         String dateOfBirth = tokens[3];
         Date theDateOfBirth = new Date(dateOfBirth);
-
-        // Validate date of birth
-        if(!theDateOfBirth.isValid()){
-            System.out.println("DOB invalid: " + theDateOfBirth + " not a valid calendar date!" );
-            return;
-        }
-        if(!theDateOfBirth.isAtleastSixteen()){
-            System.out.println("DOB invalid: " + theDateOfBirth + " younger than 16 years old." );
-            return;
-        }
-
         Profile newProfile = new Profile(lastName, firstName, theDateOfBirth);
         Student studentToRemove = studentRoster.getStudent(newProfile);
 

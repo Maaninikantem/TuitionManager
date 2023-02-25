@@ -28,6 +28,13 @@ public class Resident extends Student{
         return tuitionDue - scholarship;
     }
 
+
+
+    public void setScholarship(int scholarship){
+
+        this.scholarship = scholarship;
+    }
+
     public boolean isResident() {
         return true;
     }
