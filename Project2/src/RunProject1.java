@@ -4,7 +4,7 @@
  */
 public class RunProject1 {
     public static void main(String[] args){
-        RosterManager rosterManager = new RosterManager();
-        rosterManager.run();
+        TuitionManager tuitionManager = new TuitionManager();
+        tuitionManager.run();
     }
 }

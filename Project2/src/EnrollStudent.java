@@ -7,14 +7,13 @@ public class EnrollStudent {
         this.creditsEnrolled = creditsEnrolled;
     }
 
-    public EnrollStudent(Profile profile) {
-        this.profile = profile;
+    public int getCreditsEnrolled() {
+        return creditsEnrolled;
     }
 
-    public EnrollStudent(int creditsEnrolled){
-        this.creditsEnrolled = creditsEnrolled;
+    public Profile getProfile(){
+        return profile;
     }
-
     @Override
     public boolean equals(Object obj){
         if(obj instanceof EnrollStudent otherEnrollStudent){
@@ -24,8 +23,8 @@ public class EnrollStudent {
     }
 
     @Override
-    public String toString(){
-        return profile.toString() + " Credits Enrolled: " + creditsEnrolled;
+    public String toString(Roster roster){
+        return  roster.getStudent(getProfile()).enrollString() + ": credits enrolled: " + creditsEnrolled;
     }
 
 }

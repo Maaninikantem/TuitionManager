@@ -4,6 +4,7 @@ public class Resident extends Student{
 
     public Resident(Profile profile, Major major, int creditCompleted) {
         super(profile, major, creditCompleted);
+        scholarship = 0;
     }
 
     public double tuitionDue(int credits){
@@ -24,11 +25,15 @@ public class Resident extends Student{
         }else if(credits >= PARTTIME){
             tuitionDue = (credits * PARTTIMEPC) + (PERCENT * UNIFEE);
         }
-        return tuitionDue;
+        return tuitionDue - scholarship;
     }
 
     public boolean isResident() {
         return true;
+    }
+
+    public String enrollString(){
+        return getProfile() + "(" + "Resident" + ")";
     }
 
 }

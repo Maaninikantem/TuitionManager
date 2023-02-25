@@ -83,7 +83,24 @@ public class Roster {
             }
         }
         return true;
-    }//maintain the order after remove
+    }
+    public Student getStudent(Profile profile){
+        int studentIndex = findProfile(profile);
+        if(studentIndex == -1){
+            return null;
+        }
+        return roster[studentIndex];
+    }
+
+    private int findProfile(Profile profile) {
+        for(int i = 0; i< size; i++){
+            if(roster[i].getProfile().equals(profile)){
+                return i;
+            }
+        }
+        return -1;
+    }
+    //maintain the order after remove
     /**
      This method will determine if a student is already in the roster.
      @param student the student to search for.

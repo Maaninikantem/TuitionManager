@@ -16,8 +16,10 @@ public class Enrollment {
      @param student the student to add.
      @return false if student already in roster.
      */
+
     public void add(EnrollStudent enrollStudent){
         if(contains(enrollStudent)){
+            System.out.println(enrollStudent + " is already enrolled");
             return;
         }
         int rosterIncrement = 4;
@@ -29,6 +31,7 @@ public class Enrollment {
         }
         enrollStudents[size] = enrollStudent;
         size++;
+        System.out.println(enrollStudent + ": enrolled " + enrollStudent.getCreditsEnrolled() + " credits");
     }
 
     //move the last one in the array to replace the deleting index position
@@ -52,6 +55,21 @@ public class Enrollment {
         }
         return -1;
     }
+    private int findProfile(Profile profile){
+        for(int i = 0; i< size; i++){
+            if(enrollStudents[i].getProfile().equals(profile)){
+                return i;
+            }
+        }
+        return -1;
+    }
+    public EnrollStudent getEnrollStudent(Profile profile){
+        int studentIndex = findProfile(profile);
+        if(studentIndex == -1){
+            return null;
+        }
+        return enrollStudents[studentIndex];
+    }
     public boolean contains(EnrollStudent enrollStudent){
         return find(enrollStudent) != -1;
     }
@@ -65,9 +83,8 @@ public class Enrollment {
 
         print += "* Enrollment **\n";
 
-        for (int i = 0; i < size; i++)
-        {
-            print += enrollStudents[i].toString() + "\n";
+        for (int i = 0; i < size; i++) {
+            print += enrollStudents[i] + "\n";
         }
         System.out.print(print);
         System.out.println("* end of enrollment **");

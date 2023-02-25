@@ -29,4 +29,7 @@ public class NonResident extends Student{
     public boolean isResident() {
         return false;
     }
+    public String enrollString(){
+        return getProfile() + "(" + "Non-Resident" + ")";
+    }
 }

@@ -2,8 +2,10 @@ public class International extends NonResident{
 
     private boolean isStudyAbroad;
 
-    public International(Profile profile, Major major, int creditCompleted) {
+    public International(Profile profile, Major major, int creditCompleted, boolean isStudyAbroad) {
+
         super(profile, major, creditCompleted);
+        this.isStudyAbroad = isStudyAbroad;
     }
 
     public double tuitionDue(int credits){
@@ -33,5 +35,11 @@ public class International extends NonResident{
         return tuitionDue + HEALTHINS;
     }
 
-
+    public String enrollString(){
+        String studyAbroad = "";
+        if(isStudyAbroad){
+            studyAbroad = "study abroad";
+        }
+        return getProfile() + "(" + "International student" + studyAbroad +")";
+    }
 }

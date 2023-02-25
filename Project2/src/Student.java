@@ -17,8 +17,7 @@ public abstract class Student implements Comparable<Student> {
             return false;
         }
         return true;
-    } //polymorphism
-
+    }
     public abstract double tuitionDue(int creditsEnrolled); //polymorphism
     public abstract boolean isResident();
     /**
