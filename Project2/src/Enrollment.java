@@ -88,7 +88,7 @@ public class Enrollment {
         System.out.print(print);
         System.out.println("* end of enrollment **");
     }//print the array as is without sorting
-    public void printTuition() {
+    public void printTuition(Roster roster) {
         String print = "";
         if (size == 0) {
             System.out.println("Enrollment is empty!");
@@ -98,7 +98,7 @@ public class Enrollment {
         print += "* Enrollment **\n";
 
         for (int i = 0; i < size; i++) {
-            print += enrollStudents[i] + "\n";
+            print += enrollStudents[i].printTuition(roster) + "\n";
         }
         System.out.print(print);
         System.out.println("* end of enrollment **");

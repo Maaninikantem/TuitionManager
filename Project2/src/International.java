@@ -35,6 +35,25 @@ public class International extends NonResident{
         return tuitionDue + HEALTHINS;
     }
 
+    @Override
+    public String toString(){
+        String standing;
+
+        if(getCreditCompleted() < 30){
+            standing = "Freshman";
+        } else if(getCreditCompleted() < 60){
+            standing = "Sophomore";
+        } else if(getCreditCompleted() < 90){
+            standing = "Junior";
+        } else {
+            standing = "Senior";
+        }
+        if(isStudyAbroad){
+            return getProfile() + " (" + getMajor().getMajorCode()+ " " + getMajor().getMajorName() + " " + getMajor().getSchoolName() + ") " + "credits completed: " + getCreditCompleted() + " (" + standing + ") (international:study abroad)";
+        } else{
+            return getProfile() + " (" + getMajor().getMajorCode()+ " " + getMajor().getMajorName() + " " + getMajor().getSchoolName() + ") " + "credits completed: " + getCreditCompleted() + " (" + standing + ") (international)";
+        }
+    }
     public String enrollString(){
         String studyAbroad = "";
         if(isStudyAbroad){

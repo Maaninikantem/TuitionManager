@@ -325,7 +325,7 @@ public class TuitionManager {
     }
 
     private void printTuition() {
-        studentsEnrolled.
+        enrolledStudents.printTuition(studentRoster);
     }
 
     private void dropStudent(String[] tokens) {

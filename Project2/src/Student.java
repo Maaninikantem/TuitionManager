@@ -20,6 +20,7 @@ public abstract class Student implements Comparable<Student> {
     }
     public abstract double tuitionDue(int creditsEnrolled); //polymorphism
     public abstract boolean isResident();
+    public abstract String enrollString();
     /**
      This method constructs a student only using a profile as well as a major and credits completed.
      @param profile the student's profile.
@@ -71,22 +72,7 @@ public abstract class Student implements Comparable<Student> {
      This method converts a student into a string.
      @return a string that represents a student.
      */
-    @Override
-    public String toString(){
-        String standing;
 
-        if(creditCompleted < 30){
-            standing = "Freshman";
-        } else if(creditCompleted < 60){
-            standing = "Sophomore";
-        } else if(creditCompleted < 90){
-            standing = "Junior";
-        } else {
-            standing = "Senior";
-        }
-
-        return profile.toString() + " (" + major.getMajorCode()+ " " + major.getMajorName() + " " + major.getSchoolName() + ") " + "credits completed: " + creditCompleted + " (" + standing + ")";
-    }
     /**
      This method determines if student is equal to another.
      Profiles are students' unique identifiers.

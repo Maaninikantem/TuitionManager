@@ -42,5 +42,20 @@ public class Resident extends Student{
     public String enrollString(){
         return getProfile() + "(" + "Resident" + ")";
     }
+    @Override
+    public String toString(){
+        String standing;
+
+        if(getCreditCompleted() < 30){
+            standing = "Freshman";
+        } else if(getCreditCompleted() < 60){
+            standing = "Sophomore";
+        } else if(getCreditCompleted() < 90){
+            standing = "Junior";
+        } else {
+            standing = "Senior";
+        }
+        return getProfile() + " (" + getMajor().getMajorCode()+ " " + getMajor().getMajorName() + " " + getMajor().getSchoolName() + ") " + "credits completed: " + getCreditCompleted() + " (" + standing + ") (resident)";
+    }
 
 }

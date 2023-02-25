@@ -21,10 +21,13 @@ public class EnrollStudent {
         }
         return false;
     }
-
     @Override
-    public String toString(Roster roster){
-        return  roster.getStudent(getProfile()).enrollString() + ": credits enrolled: " + creditsEnrolled;
+    public String toString(){
+        return profile.toString() + ": credits enrolled: " + creditsEnrolled;
+    }
+    public String printTuition(Roster roster){
+        Student student = roster.getStudent(getProfile());
+        return  student.enrollString() + ": credits enrolled: " + creditsEnrolled + " tuition due: " + student.tuitionDue(creditsEnrolled);
     }
 
 }
