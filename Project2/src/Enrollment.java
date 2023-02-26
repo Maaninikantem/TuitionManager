@@ -41,10 +41,10 @@ public class Enrollment {
         if(!contains(enrollStudent)){
             return;
         }
-
         int indexOfEnrollStudent = find(enrollStudent);
         enrollStudents[indexOfEnrollStudent] = enrollStudents[size-1];
         size--;
+
     }
 
     private int find(EnrollStudent enrollStudent) {
@@ -55,7 +55,7 @@ public class Enrollment {
         }
         return -1;
     }
-    private int findProfile(Profile profile){
+    public int findProfile(Profile profile){
         for(int i = 0; i< size; i++){
             if(enrollStudents[i].getProfile().equals(profile)){
                 return i;
@@ -104,5 +104,43 @@ public class Enrollment {
         System.out.println("* end of enrollment **");
     }
 
+    public void semesterEnd(Roster roster){
+        for(int i = 0; i <= size; i++) {
+            EnrollStudent currEnrollStudent = enrollStudents[i];
+            Profile currentProfile = currEnrollStudent.getProfile();
+            int creds = currEnrollStudent.getCreditsEnrolled();
+            if (roster.contains(currentProfile)) {
+                roster.getStudent(currentProfile).addCredits(creds);
+            }
+        }
+        printSemEnd(roster);
+    }
 
+    public void printSemEnd(Roster roster){
+
+            String print = "";
+            if (size == 0) {
+                System.out.println("Enrollment is empty!");
+                return;
+            }
+
+            print += "* List of students eligible for Graduation **\n";
+
+            for (int i = 0; i < size; i++) {
+                EnrollStudent currEnrollStudent = enrollStudents[i];
+                Profile currentProfile = currEnrollStudent.getProfile();
+                if(roster.contains(currentProfile)){
+                    Student student1 = roster.getStudent(currentProfile);
+                    if(student1.getCreditCompleted() >= 120){
+                        print += student1 + "\n";
+                    }
+                }
+
+            }
+            System.out.print(print);
+            System.out.println("* end of list **");
+        }
 }
+
+
+

@@ -65,6 +65,9 @@ public abstract class Student implements Comparable<Student> {
      This method gets the credits completed.
      @return credits completed.
      */
+    public void addCredits(int moreCredits){
+        this.creditCompleted = creditCompleted + moreCredits;
+    }
     public int getCreditCompleted() {
         return creditCompleted;
     }

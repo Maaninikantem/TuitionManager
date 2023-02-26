@@ -30,6 +30,18 @@ public class TuitionManager {
      @param tokens the commands the user inputs.
      */
     private void addStudent(String typeOfStudent, String[] tokens) {
+        if(tokens[0].equals("AR") || tokens[0].equals("AN") || tokens[0].equals("AI")){
+            if(tokens.length < 6){
+                System.out.println("Missing data in line command. ");
+                return;
+            }
+        }
+        if(tokens[0].equals("AT")){
+            if(tokens.length < 7){
+                System.out.println("Missing data in line command. ");
+                return;
+            }
+        }
         String firstName = tokens[1];
         String lastName = tokens[2];
         String dateOfBirth = tokens[3];
@@ -43,7 +55,6 @@ public class TuitionManager {
             return;
         }
 
-        boolean isStudyAbroad = false;
         String state = "";
 
         if(typeOfStudent.equals("T")){
@@ -96,7 +107,7 @@ public class TuitionManager {
         }
     }
     /**
-     This method will validate a users input and then remove a student from the roster.
+     This method will validate a users input and then remove a student from the enrollment.
      @param tokens the commands the user inputs.
      */
     private void removeStudent(String[] tokens) {
@@ -188,7 +199,15 @@ public class TuitionManager {
         }
     }
 
+    /**
+     * this method enrolls the students into the enrollment roster and adds them into the enrollment using the add method
+     * @param tokens, that take the student's profile and credits enrolled
+     */
     public void enrollStudent(String[] tokens){
+        if (tokens.length < 5){
+            System.out.println("Missing data in line command. ");
+            return;
+        }
         String firstName = tokens[1];
         String lastName = tokens[2];
         String dateOfBirth = tokens[3];
@@ -215,6 +234,10 @@ public class TuitionManager {
         enrolledStudents.add(enrollStudent);
     }
 
+    /**
+     * This method takes the scholarship amount being awarded to a resident student and makes sure the amount is valid
+     * @param tokens, that takes the profile and the amount of money awarded
+     */
     public void awardScholarship(String[] tokens){
         String firstName = tokens[1];
         String lastName = tokens[2];
@@ -324,10 +347,17 @@ public class TuitionManager {
         }
     }
 
+    /**
+     * This method prints the tuition due for all the enrolled students
+     */
     private void printTuition() {
         enrolledStudents.printTuition(studentRoster);
     }
 
+    /**
+     * This method drops the student from enrollment based on the profile
+     * @param tokens, the command arguments make up the profile of the student
+     */
     private void dropStudent(String[] tokens) {
         String firstName = tokens[1];
         String lastName = tokens[2];
@@ -337,13 +367,23 @@ public class TuitionManager {
         Profile newProfile = new Profile(lastName, firstName, theDateOfBirth);
 
         // remove student from roster
-        if(enrolledStudents.remove(newProfile)){
-            System.out.println(newProfile + " removed from the roster.");
-        } else {
+        int index = enrolledStudents.findProfile(newProfile);
+        if(index == -1){
             System.out.println(newProfile + " is not in the roster.");
+        } else {
+            enrolledStudents.remove(enrolledStudents.getEnrollStudent(newProfile));
+            System.out.println(newProfile + " removed from the roster.");
         }
+
     }
 
+    private void semesterEnd(){
+        enrolledStudents.semesterEnd(studentRoster);
+    }
+
+    /**
+     * this method prints all the students in the enrollment array based on the order in the list
+     */
     private void printEnrollment() {
         enrolledStudents.print();
     }
@@ -358,7 +398,7 @@ public class TuitionManager {
     /**
      This method turns the boolean running to true, and starts reading user input
      */
-    public void run(){
+    public void run() throws FileNotFoundException {
         running = true;
         System.out.println("Roster Manager running...");
         while(running){

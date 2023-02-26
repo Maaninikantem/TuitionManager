@@ -1,6 +1,11 @@
 public class NonResident extends Student{
 
-
+    /**
+     *
+     * @param profile the porfile of the student
+     * @param major the major of the student
+     * @param creditCompleted the amount of credits teh student finished
+     */
     public NonResident(Profile profile, Major major, int creditCompleted) {
         super(profile, major, creditCompleted);
     }

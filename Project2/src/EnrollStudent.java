@@ -7,6 +7,9 @@ public class EnrollStudent {
         this.creditsEnrolled = creditsEnrolled;
     }
 
+    public EnrollStudent(Profile profile){
+        this.profile = profile;
+    }
     public int getCreditsEnrolled() {
         return creditsEnrolled;
     }
