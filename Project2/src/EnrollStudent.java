@@ -29,7 +29,7 @@ public class EnrollStudent {
         return profile.toString() + ": credits enrolled: " + creditsEnrolled;
     }
     public String printTuition(Roster roster){
-        Student student = roster.getStudent(getProfile());
+        Student student = roster.getStudent(profile);
         return  student.enrollString() + ": credits enrolled: " + creditsEnrolled + " tuition due: " + student.tuitionDue(creditsEnrolled);
     }
 

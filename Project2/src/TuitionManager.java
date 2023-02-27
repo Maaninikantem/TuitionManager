@@ -82,7 +82,7 @@ public class TuitionManager {
             System.out.println("Major code invalid: " + majorStr);
             return;
         }
-        Profile newProfile = new Profile(lastName, firstName, theDateOfBirth);
+        Profile newProfile = new Profile(firstName, lastName, theDateOfBirth);
         Student newStudent = null;
 
         switch(typeOfStudent){
@@ -115,12 +115,13 @@ public class TuitionManager {
         String lastName = tokens[2];
         String dateOfBirth = tokens[3];
         Date theDateOfBirth = new Date(dateOfBirth);
-        Profile newProfile = new Profile(lastName, firstName, theDateOfBirth);
+        Profile newProfile = new Profile(firstName, lastName, theDateOfBirth);
         Student studentToRemove = studentRoster.getStudent(newProfile);
 
         // remove student from roster
         if(studentRoster.remove(studentToRemove)){
             System.out.println(newProfile + " removed from the roster.");
+            dropStudent(tokens);
         } else {
             System.out.println(newProfile + " is not in the roster.");
         }
@@ -172,7 +173,7 @@ public class TuitionManager {
             return;
         }
 
-        Profile newProfile = new Profile(lastName, firstName, theDateOfBirth);
+        Profile newProfile = new Profile(firstName, lastName, theDateOfBirth);
         Student studentToChangeMajor = studentRoster.getStudent(newProfile);
 
         //check if major exists
@@ -364,15 +365,15 @@ public class TuitionManager {
         String dateOfBirth = tokens[3];
         Date theDateOfBirth = new Date(dateOfBirth);
 
-        Profile newProfile = new Profile(lastName, firstName, theDateOfBirth);
+        Profile newProfile = new Profile(firstName, lastName, theDateOfBirth);
 
         // remove student from roster
         int index = enrolledStudents.findProfile(newProfile);
-        if(index == -1){
-            System.out.println(newProfile + " is not in the roster.");
-        } else {
+        if(index != -1){
             enrolledStudents.remove(enrolledStudents.getEnrollStudent(newProfile));
-            System.out.println(newProfile + " removed from the roster.");
+            System.out.println(newProfile + " dropped. ");
+        } else {
+            System.out.println(newProfile + " is not enrolled.");
         }
 
     }

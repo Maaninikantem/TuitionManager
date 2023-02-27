@@ -31,20 +31,16 @@ public class Enrollment {
         }
         enrollStudents[size] = enrollStudent;
         size++;
-        System.out.println(enrollStudent + ": enrolled " + enrollStudent.getCreditsEnrolled() + " credits");
+        System.out.println(enrollStudent);
     }
 
     //move the last one in the array to replace the deleting index position
 
 
     public void remove(EnrollStudent enrollStudent){
-        if(!contains(enrollStudent)){
-            return;
-        }
         int indexOfEnrollStudent = find(enrollStudent);
         enrollStudents[indexOfEnrollStudent] = enrollStudents[size-1];
         size--;
-
     }
 
     private int find(EnrollStudent enrollStudent) {
