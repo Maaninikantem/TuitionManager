@@ -350,6 +350,7 @@ public class TuitionManager {
 
     /**
      * This method prints the tuition due for all the enrolled students
+     * changes changes changes
      */
     private void printTuition() {
         enrolledStudents.printTuition(studentRoster);
