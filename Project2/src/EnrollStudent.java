@@ -1,3 +1,5 @@
+import java.text.DecimalFormat;
+
 public class EnrollStudent {
     private Profile profile;
     private int creditsEnrolled;
@@ -29,8 +31,9 @@ public class EnrollStudent {
         return profile.toString() + ": credits enrolled: " + creditsEnrolled;
     }
     public String printTuition(Roster roster){
+        DecimalFormat df = new DecimalFormat("##,###.00");
         Student student = roster.getStudent(profile);
-        return  student.enrollString() + ": credits enrolled: " + creditsEnrolled + " tuition due: " + student.tuitionDue(creditsEnrolled);
+        return  student.enrollString() + ": credits enrolled: " + creditsEnrolled + " tuition due: $" + df.format(student.tuitionDue(creditsEnrolled));
     }
 
 }

@@ -29,7 +29,7 @@ public class TuitionManager {
      This method will validate a users input and then add a new student into the roster.
      @param tokens the commands the user inputs.
      */
-    private void addStudent(String typeOfStudent, String[] tokens) {
+    private void addStudent(String typeOfStudent, String[] tokens, boolean loadingStudents) {
         if(tokens[0].equals("AR") || tokens[0].equals("AN") || tokens[0].equals("AI")){
             if(tokens.length < 6){
                 System.out.println("Missing data in line command. ");
@@ -37,7 +37,10 @@ public class TuitionManager {
             }
         }
         if(tokens[0].equals("AT")){
-            if(tokens.length < 7){
+            if(tokens.length == 6){
+                System.out.println("Missing the state code. ");
+                return;
+            } else if(tokens.length < 7){
                 System.out.println("Missing data in line command. ");
                 return;
             }
@@ -49,9 +52,6 @@ public class TuitionManager {
         Major majorMajor = Major.valueOf(majorStr);
         int credits;
         boolean isStudyAbroad = false;
-
-
-
         if(typeOfStudent.equals("I")){
             if (tokens.length == 7){
                 isStudyAbroad = Boolean.parseBoolean(tokens[6]);
@@ -67,8 +67,11 @@ public class TuitionManager {
         String state = "";
         if(typeOfStudent.equals("T")) {
             state = tokens[6].toUpperCase();
+            if(!(state.equals("NY") || state.equals("CT"))){
+                System.out.println(state + ": Invalid state code.");
+                return;
+            }
         }
-
 
         Date theDateOfBirth = new Date(dateOfBirth);
 
@@ -110,9 +113,14 @@ public class TuitionManager {
             return;
         }
         if(studentRoster.add(newStudent)){
-            System.out.println(newStudent.getProfile().toString() + " added to the roster.");
+            if(!loadingStudents){
+                System.out.println(newStudent.getProfile().toString() + " added to the roster.");
+            }
+
         } else {
-            System.out.println(newStudent.getProfile().toString() + " is already in the roster.");
+            if(!loadingStudents) {
+                System.out.println(newStudent.getProfile().toString() + " is already in the roster.");
+            }
         }
     }
     /**
@@ -130,7 +138,7 @@ public class TuitionManager {
         // remove student from roster
         if(studentRoster.remove(studentToRemove)){
             System.out.println(newProfile + " removed from the roster.");
-            dropStudent(tokens);
+           // dropStudent(tokens);
         } else {
             System.out.println(newProfile + " is not in the roster.");
         }
@@ -205,8 +213,9 @@ public class TuitionManager {
         {
             String studentLine = scanner.nextLine();
             String[] studentParameters = studentLine.split(",");
-            addStudent(studentParameters[0], studentParameters);
+            addStudent(studentParameters[0], studentParameters, true);
         }
+        System.out.println("Students loaded to the roster.");
     }
 
     /**
@@ -230,18 +239,16 @@ public class TuitionManager {
         }
 
         Date date = new Date(dateOfBirth);
-        Profile newProfile = new Profile(firstName, lastName, date);
-        Major fillerMajor = null;
-        int fillerCredits = 0;
-        Student newStudent = new Resident(newProfile, fillerMajor, fillerCredits);
-
-        if(!newStudent.isValid(creditsEnrolled)){
-            System.out.println("Invalid credit hours");
+        Profile profileToEnroll = new Profile(firstName, lastName, date);
+        Student studentInRoster = studentRoster.getStudent(profileToEnroll);
+        if(studentInRoster == null){
+            System.out.println("Cannot enroll: " + profileToEnroll + " is not in the roster. ");
+            return;
         }
-
-        EnrollStudent enrollStudent = new EnrollStudent(newProfile, creditsEnrolled);
-
-        enrolledStudents.add(enrollStudent);
+        if(studentInRoster.isValid(creditsEnrolled)){
+            EnrollStudent enrollStudent = new EnrollStudent(profileToEnroll, creditsEnrolled);
+            enrolledStudents.add(enrollStudent);
+        }
     }
 
     /**
@@ -249,15 +256,14 @@ public class TuitionManager {
      * @param tokens, that takes the profile and the amount of money awarded
      */
     public void awardScholarship(String[] tokens){
-        String firstName = tokens[1];
-        String lastName = tokens[2];
-        String dateOfBirth = tokens[3];
-        int scholarship;
         if(tokens.length < 5){
             System.out.println("Missing data in line command");
             return;
         }
-
+        String firstName = tokens[1];
+        String lastName = tokens[2];
+        String dateOfBirth = tokens[3];
+        int scholarship;
         try {
             scholarship = Integer.parseInt(tokens[4]);
         } catch (NumberFormatException e) {
@@ -275,9 +281,11 @@ public class TuitionManager {
             int creditsEnrolled = enrolledStudents.getEnrollStudent(newProfile).getCreditsEnrolled();
             if(creditsEnrolled < 12){
                 System.out.println(newProfile + " part time student is not eligible for the scholarship.");
+                return;
             }
             if(scholarship <= 0 || scholarship > 10000){
                 System.out.println(scholarship + ": Invalid Amount");
+                return;
             }
             Resident newResident = (Resident) newStudent;
             newResident.setScholarship(scholarship);
@@ -285,7 +293,6 @@ public class TuitionManager {
         } else {
             System.out.println(newStudent + " is not eligible for scholarship");
         }
-
     }
 
     /**
@@ -301,16 +308,16 @@ public class TuitionManager {
                 running = false;
                 break;
             case "AR":
-                addStudent("R",tokens);
+                addStudent("R",tokens, false);
                 break;
             case "AN":
-                addStudent("N",tokens);
+                addStudent("N",tokens, false);
                 break;
             case "AT":
-                addStudent("T",tokens);
+                addStudent("T",tokens, false);
                 break;
             case "AI":
-                addStudent("I",tokens);
+                addStudent("I",tokens, false);
                 break;
             case "R":
                 removeStudent(tokens);

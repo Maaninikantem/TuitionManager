@@ -144,7 +144,7 @@ public class Enrollment {
      * @param roster
      */
     public void semesterEnd(Roster roster){
-        for(int i = 0; i <= size; i++) {
+        for(int i = 0; i < size; i++) {
             EnrollStudent currEnrollStudent = enrollStudents[i];
             Profile currentProfile = currEnrollStudent.getProfile();
             int creds = currEnrollStudent.getCreditsEnrolled();

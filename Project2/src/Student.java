@@ -7,16 +7,25 @@ public abstract class Student implements Comparable<Student> {
     private Major major; //Major is an enum type
     private int creditCompleted;
 
-    public boolean isValid(int creditEnrolled) {
-        String print = "";
-        if (creditEnrolled < 0) {
-            return false;
-        } else if(creditEnrolled < 3){
-            return false;
-        } else if(creditEnrolled > 24){
-            return false;
+    public boolean isValid(int creditsEnrolled) {
+        String nameOfClass = this.getClass().getName();
+        String errorClassName = "";
+        switch(nameOfClass){
+            case "NonResident":
+                errorClassName = "Non-Resident";
+                break;
+            case "Resident":
+                errorClassName = "Resident";
+                break;
+            case "TriState":
+                errorClassName = "Tristate";
+                break;
         }
-        return true;
+        if(creditsEnrolled >= 3 && creditsEnrolled <= 24){
+            return true;
+        }
+        System.out.println("(" + errorClassName + ") " + creditsEnrolled +": invalid credits hours.");
+        return false;
     }
     public abstract double tuitionDue(int creditsEnrolled); //polymorphism
     public abstract boolean isResident();

@@ -13,9 +13,9 @@ public class International extends NonResident{
         double PARTTIMEPC = 966;
         double UNIFEE = 3268;
         double PERCENT = 0.8;
-        int OVERTIME = 16;
-        int FULLTIME = 12;
-        int PARTTIME = 3;
+        double OVERTIME = 16;
+        double FULLTIME = 12;
+        double PARTTIME = 3;
         double HEALTHINS = 2650;
 
         if(isStudyAbroad){
@@ -25,7 +25,7 @@ public class International extends NonResident{
 
         double tuitionDue = 0;
         if(credits > OVERTIME){
-            int extraCredits = credits - OVERTIME;
+            double extraCredits = credits - OVERTIME;
             tuitionDue = FULLTIMERATE + UNIFEE + (PARTTIMEPC * extraCredits);
         }else if(credits >= FULLTIME){
             tuitionDue = FULLTIMERATE + UNIFEE;
@@ -60,5 +60,21 @@ public class International extends NonResident{
             studyAbroad = "study abroad";
         }
         return getProfile() + "(" + "International student" + studyAbroad +")";
+    }
+    @Override
+    public boolean isValid(int creditsEnrolled){
+        if(isStudyAbroad){
+            if(creditsEnrolled >= 3 && creditsEnrolled <= 12){
+                return true;
+            }
+            System.out.println("(International studentstudy abroad) " + creditsEnrolled +": invalid credits hours.");
+            return false;
+        } else {
+            if(creditsEnrolled >= 12 && creditsEnrolled <= 24){
+                return true;
+            }
+            System.out.println("(International student) " + creditsEnrolled +": invalid credits hours.");
+            return false;
+        }
     }
 }

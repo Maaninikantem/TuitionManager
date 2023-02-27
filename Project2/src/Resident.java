@@ -12,13 +12,13 @@ public class Resident extends Student{
         double PARTTIMEPC = 404;
         double UNIFEE = 3268;
         double PERCENT = 0.8;
-        int OVERTIME = 16;
-        int FULLTIME = 12;
-        int PARTTIME = 3;
-
+        double OVERTIME = 16;
+        double FULLTIME = 12;
+        double PARTTIME = 3;
         double tuitionDue = 0;
+
         if(credits > OVERTIME){
-            int extraCredits = credits - OVERTIME;
+            double extraCredits = credits - OVERTIME;
             tuitionDue = FULLTIMERATE + UNIFEE + (PARTTIMEPC * extraCredits);
         }else if(credits >= FULLTIME){
             tuitionDue = FULLTIMERATE + UNIFEE;
@@ -28,10 +28,7 @@ public class Resident extends Student{
         return tuitionDue - scholarship;
     }
 
-
-
     public void setScholarship(int scholarship){
-
         this.scholarship = scholarship;
     }
 

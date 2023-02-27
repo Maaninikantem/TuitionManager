@@ -15,13 +15,13 @@ public class NonResident extends Student{
         double PARTTIMEPC = 966;
         double UNIFEE = 3268;
         double PERCENT = 0.8;
-        int OVERTIME = 16;
-        int FULLTIME = 12;
-        int PARTTIME = 3;
+        double OVERTIME = 16;
+        double FULLTIME = 12;
+        double PARTTIME = 3;
 
         double tuitionDue = 0;
         if(credits > OVERTIME){
-            int extraCredits = credits - OVERTIME;
+            double extraCredits = credits - OVERTIME;
             tuitionDue = FULLTIMERATE + UNIFEE + (PARTTIMEPC * extraCredits);
         }else if(credits >= FULLTIME){
             tuitionDue = FULLTIMERATE + UNIFEE;
