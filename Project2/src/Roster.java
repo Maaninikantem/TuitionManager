@@ -109,6 +109,9 @@ public class Roster {
     public boolean contains(Student student){
         return find(student) != -1;
     } //if the student is in roster
+    public boolean contains(Profile profile){
+        return findProfile(profile) != -1;
+    }
     /**
      This method will sort the roster by last name, first name, and date of birth.
      @param schoolFilter which school to sort. if equal to "all" then all schools will be sorted.

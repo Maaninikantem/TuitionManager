@@ -48,6 +48,15 @@ public class TuitionManager {
         String majorStr = tokens[4].toUpperCase();
         Major majorMajor = Major.valueOf(majorStr);
         int credits;
+        boolean isStudyAbroad = false;
+
+
+
+        if(typeOfStudent.equals("I")){
+            if (tokens.length == 7){
+                isStudyAbroad = Boolean.parseBoolean(tokens[6]);
+            }
+        }
         try {
             credits = Integer.parseInt(tokens[5]);
         } catch (NumberFormatException e) {
@@ -56,13 +65,10 @@ public class TuitionManager {
         }
 
         String state = "";
-
-        if(typeOfStudent.equals("T")){
+        if(typeOfStudent.equals("T")) {
             state = tokens[6].toUpperCase();
         }
-        if(typeOfStudent.equals("I")){
-            isStudyAbroad = Boolean.parseBoolean(tokens[6]);
-        }
+
 
         Date theDateOfBirth = new Date(dateOfBirth);
 
@@ -99,7 +105,10 @@ public class TuitionManager {
                 newStudent = new International(newProfile, majorMajor, credits, isStudyAbroad);
                 break;
         }
-
+        if(newStudent == null){
+            System.out.println("student was never assigned!");
+            return;
+        }
         if(studentRoster.add(newStudent)){
             System.out.println(newStudent.getProfile().toString() + " added to the roster.");
         } else {
@@ -340,9 +349,9 @@ public class TuitionManager {
                 printTuition();
                 break;
             case "SE":
-                semesterEnd(tokens);
+                semesterEnd();
                 break;
-            // add more cases to handle other commands
+             //add more cases to handle other commands
             default:
                 System.out.println(theCommand + " is an invalid command!");
         }

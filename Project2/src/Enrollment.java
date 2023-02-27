@@ -129,13 +129,13 @@ public class Enrollment {
             return;
         }
 
-        print += "* Enrollment **\n";
+        print += "* Tuition due **\n";
 
         for (int i = 0; i < size; i++) {
             print += enrollStudents[i].printTuition(roster) + "\n";
         }
         System.out.print(print);
-        System.out.println("* end of enrollment **");
+        System.out.println("* end of Tuition due **");
     }
 
     /**
