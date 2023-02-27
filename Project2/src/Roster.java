@@ -1,6 +1,6 @@
 /**
  This class is responsible for executing basic commands to manipulate or display a roster.
- @author Michael Mankiewicz
+ @author Michael Mankiewicz, Maanini Kantem
  */
 public class Roster {
     private Student[] roster;
@@ -84,6 +84,12 @@ public class Roster {
         }
         return true;
     }
+
+    /**
+     * This method is used to find the index of the student based on the profile
+     * @param profile, the student's profile
+     * @return the index of the student in the roster
+     */
     public Student getStudent(Profile profile){
         int studentIndex = findProfile(profile);
         if(studentIndex == -1){
@@ -92,13 +98,19 @@ public class Roster {
         return roster[studentIndex];
     }
 
+    /**
+     * This method is used to find the profile of the student in the roster
+     * @param profile based on the profile of the student
+     * @return index of the profile is found, -1 if not found
+     */
     private int findProfile(Profile profile) {
+        int NOT_FOUND = -1;
         for(int i = 0; i< size; i++){
             if(roster[i].getProfile().equals(profile)){
                 return i;
             }
         }
-        return -1;
+        return NOT_FOUND;
     }
     //maintain the order after remove
     /**
@@ -107,10 +119,18 @@ public class Roster {
      @return true if student in roster.
      */
     public boolean contains(Student student){
-        return find(student) != -1;
+        int NOT_FOUND = -1;
+        return find(student) != NOT_FOUND;
     } //if the student is in roster
+
+    /**
+     * This method determines if the profile is in the roster or not using the findProfile method
+     * @param profile finding the profile given
+     * @return false it not found, true if found
+     */
     public boolean contains(Profile profile){
-        return findProfile(profile) != -1;
+        int NOT_FOUND = -1;
+        return findProfile(profile) != NOT_FOUND;
     }
     /**
      This method will sort the roster by last name, first name, and date of birth.
@@ -118,6 +138,7 @@ public class Roster {
      */
     void sortDefault(String schoolFilter) {
         // One by one move boundary of unsorted subarray
+        int min = 0;
         for (int i = 0; i < size-1; i++)
         {
             if(!roster[i].getMajor().getSchoolName().equals(schoolFilter) && !schoolFilter.equals("all")){
@@ -129,7 +150,7 @@ public class Roster {
                 if(!roster[j].getMajor().getSchoolName().equals(schoolFilter) && !schoolFilter.equals("all")){
                     continue;
                 }
-                if (roster[j].compareTo(roster[min_idx]) < 0)
+                if (roster[j].compareTo(roster[min_idx]) < min)
                     min_idx = j;
             }
             Student temp = roster[min_idx];

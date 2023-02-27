@@ -1,6 +1,6 @@
 /**
  This class lists all the possible Majors, and defines the order of those majors.
- @author Michael Mankiewicz
+ @author Michael Mankiewicz, Maanini Kantem
  */
 public enum Major implements Comparable<Major>{
     BAIT("33:136", "BAIT", "RBS"),

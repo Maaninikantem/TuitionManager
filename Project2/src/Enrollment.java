@@ -6,6 +6,10 @@ public class Enrollment {
 
     private EnrollStudent[] enrollStudents;
     private int size;
+
+    /**
+     * This method is used to increase the capacity of the enrollement array, when the students are added
+     */
     private void grow() {
         int rosterIncrement = 4;
         int newCapacity = enrollStudents.length + rosterIncrement;
@@ -14,7 +18,7 @@ public class Enrollment {
             newEnrollStudents[i] = enrollStudents[i];
         }
         enrollStudents = newEnrollStudents;
-    } //increase the array capacity by 4
+    }
     /**
      This method will add a registered student into the enrollment.
      @param enrollStudent the student to add.
@@ -55,12 +59,13 @@ public class Enrollment {
      * @return the index of found, -1 if the enrollStudent was not found
      */
     private int find(EnrollStudent enrollStudent) {
+        int NOT_FOUND = -1;
         for(int i = 0; i < size; i++){
             if(enrollStudents[i].equals(enrollStudent)){
                 return i;
             }
         }
-        return -1;
+        return NOT_FOUND;
     }
 
     /**
@@ -69,12 +74,13 @@ public class Enrollment {
      * @return the index of found, -1 if the enrollStudent's profile was not found
      */
     public int findProfile(Profile profile){
+        int NOT_FOUND = -1;
         for(int i = 0; i< size; i++){
             if(enrollStudents[i].getProfile().equals(profile)){
                 return i;
             }
         }
-        return -1;
+        return NOT_FOUND;
     }
 
     /**
@@ -83,8 +89,9 @@ public class Enrollment {
      * @return return the index of the enrollStudent if found, null if not found
      */
     public EnrollStudent getEnrollStudent(Profile profile){
+        int NOT_FOUND = -1;
         int studentIndex = findProfile(profile);
-        if(studentIndex == -1){
+        if(studentIndex == NOT_FOUND){
             return null;
         }
         return enrollStudents[studentIndex];
@@ -96,11 +103,13 @@ public class Enrollment {
      * @return true or false based on found or not found
      */
     public boolean contains(EnrollStudent enrollStudent){
-        return find(enrollStudent) != -1;
+        int NOT_FOUND = -1;
+        return find(enrollStudent) != NOT_FOUND;
     }
 
     /**
      * this method is used to print the list of enrolledStudents in the list so far, based on their profiles, credits enrolled
+     * this method prints the list without sorting them in any particular order
      */
     public void print() {
         String print = "";

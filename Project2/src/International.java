@@ -1,13 +1,29 @@
+/**
+ * This class defines the international students, and determines if they are studyAbroad or not.
+ * @author Michael Mankiewicz, Maanini Kantem
+ */
 public class International extends NonResident{
 
     private boolean isStudyAbroad;
 
+    /**
+     * This is the constructor of the international student, taking in the same parameters as it's super class and the boolean
+     * @param profile, the profile of the student, their name and dob
+     * @param major, the major of the student
+     * @param creditCompleted, the amount of cresits the student has finished
+     * @param isStudyAbroad, to see if student is part of the studyAbroad program or not
+     */
     public International(Profile profile, Major major, int creditCompleted, boolean isStudyAbroad) {
 
         super(profile, major, creditCompleted);
         this.isStudyAbroad = isStudyAbroad;
     }
 
+    /**
+     * This method determines the amoutn of tuition every student owes based on the amount of enrolled credits
+     * @param credits based on the credits and status, the amount of money the student owes is determined
+     * @return the amount of tuition the student owes
+     */
     public double tuitionDue(int credits){
         double FULLTIMERATE = 29737;
         double PARTTIMEPC = 966;
@@ -35,6 +51,10 @@ public class International extends NonResident{
         return tuitionDue + HEALTHINS;
     }
 
+    /**
+     * This method represents the amount due as a string
+     * @return the student's profile, major, and stading along with their status and tuition due
+     */
     @Override
     public String toString(){
         String standing;
@@ -54,6 +74,11 @@ public class International extends NonResident{
             return getProfile() + " (" + getMajor().getMajorCode()+ " " + getMajor().getMajorName() + " " + getMajor().getSchoolName() + ") " + "credits completed: " + getCreditCompleted() + " (" + standing + ") (international)";
         }
     }
+
+    /**
+     * This is a helper method to determine if the student is studyAbroad or not.
+     * @return the string method that represent the status of the student
+     */
     public String enrollString(){
         String studyAbroad = "";
         if(isStudyAbroad){
@@ -61,6 +86,12 @@ public class International extends NonResident{
         }
         return getProfile() + "(" + "International student" + studyAbroad +")";
     }
+
+    /**
+     * This method validates the credits the student is enrolled in, based on if its valid or not
+     * @param creditsEnrolled determining if the credit input is valid
+     * @return true if it is valid, false if not
+     */
     @Override
     public boolean isValid(int creditsEnrolled){
         if(isStudyAbroad){

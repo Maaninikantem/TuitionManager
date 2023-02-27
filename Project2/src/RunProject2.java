@@ -2,7 +2,7 @@ import java.io.FileNotFoundException;
 
 /**
  This is the main class which initiates the code to start running
- @author Michael Mankiewicz
+ @author Michael Mankiewicz, Maanini Kantem
  */
 public class RunProject2 {
     public static void main(String[] args) throws FileNotFoundException {

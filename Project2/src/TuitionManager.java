@@ -9,7 +9,7 @@ public class TuitionManager {
     private boolean running;
     private Scanner scanner;
     Roster studentRoster = new Roster();
-    Enrollment enrolledStudents = new Enrollment();
+    Enrollment enrolledStudents = new Enrollment(); //new isntance of the enrollStudent
     /**
      This method determines if a given major exists within the major enum.
      @param majorName the major to search for.
@@ -26,7 +26,7 @@ public class TuitionManager {
         return majorExists;
     }
     /**
-     This method will validate a users input and then add a new student into the roster.
+     This method will validate a users input and then add a new student into the enrollment based on their resident status.
      @param tokens the commands the user inputs.
      */
     private void addStudent(String typeOfStudent, String[] tokens, boolean loadingStudents) {
@@ -124,7 +124,7 @@ public class TuitionManager {
         }
     }
     /**
-     This method will validate a users input and then remove a student from the enrollment.
+     This method will validate a users input and then remove a student from the roster.
      @param tokens the commands the user inputs.
      */
     private void removeStudent(String[] tokens) {
@@ -144,7 +144,7 @@ public class TuitionManager {
         }
     }
     /**
-     This method will run the print command in the roster.
+     This method will run the print command in the enrollment.
      */
     private void printStudents(){
         studentRoster.print();
@@ -207,6 +207,10 @@ public class TuitionManager {
         }
     }
 
+    /**
+     * This method is used to load the students from the file given into the roster
+     * @throws FileNotFoundException
+     */
     public void loadStudents() throws FileNotFoundException {
         Scanner scanner = new Scanner(new File("studentList.txt"));
         while(scanner.hasNextLine())
@@ -395,6 +399,10 @@ public class TuitionManager {
 
     }
 
+    /**
+     * This method calculates the amount of credits each student is finishing after the semester
+     * and prints out the students eligible for graduation
+     */
     private void semesterEnd(){
         enrolledStudents.semesterEnd(studentRoster);
     }

@@ -1,7 +1,7 @@
 /**
  This class defines that a profile is a last name, first name, and date of birth.
  A profile is a unique identifier for a student.
- @author Michael Mankiewicz
+ @author Michael Mankiewicz, Maanini Kantem
  */
 public class Profile implements Comparable<Profile> {
     private String lname;

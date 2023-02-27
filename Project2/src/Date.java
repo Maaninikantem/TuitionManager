@@ -1,7 +1,7 @@
 import java.util.Calendar;
 /**
  This class defines a date.
- @author Michael Mankiewicz, Adam Shaikh
+ @author Michael Mankiewicz, Maanini Kantem
  */
 public class Date implements Comparable<Date> {
     private int year;

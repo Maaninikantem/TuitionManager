@@ -1,12 +1,17 @@
 /**
  This class defines that a student is a profile, major, and credits completed.
- @author Michael Mankiewicz
+ @author Michael Mankiewicz, Maanini Kantem
  */
 public abstract class Student implements Comparable<Student> {
     private Profile profile;
     private Major major; //Major is an enum type
     private int creditCompleted;
 
+    /**
+     * This method validates the amount of credits the students are enrolled in upon the input
+     * @param creditsEnrolled based on the credits the student is enrolled in
+     * @return true if the credits are valid, false if not
+     */
     public boolean isValid(int creditsEnrolled) {
         String nameOfClass = this.getClass().getName();
         String errorClassName = "";
@@ -77,13 +82,14 @@ public abstract class Student implements Comparable<Student> {
     public void addCredits(int moreCredits){
         this.creditCompleted = creditCompleted + moreCredits;
     }
+
+    /**
+     * This method returns the amount of credits completed by the student
+     * @return the credits completed by the student
+     */
     public int getCreditCompleted() {
         return creditCompleted;
     }
-    /**
-     This method converts a student into a string.
-     @return a string that represents a student.
-     */
 
     /**
      This method determines if student is equal to another.
