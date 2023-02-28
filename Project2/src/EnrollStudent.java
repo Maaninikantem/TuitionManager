@@ -35,6 +35,13 @@ public class EnrollStudent {
     }
 
     /**
+     * this method is used to set the student's number of creditsEnrolled for the semester
+     */
+    public void setCreditsEnrolled(int newCredits) {
+        this.creditsEnrolled = newCredits;
+    }
+
+    /**
      * this method is used to help access the profile of the student being enrolled
      * @return the profile of the student
      */
@@ -61,7 +68,7 @@ public class EnrollStudent {
      */
     @Override
     public String toString(){
-        return profile.toString() + ": credits enrolled: " + creditsEnrolled;
+        return profile.toString() + " enrolled " + creditsEnrolled + " credits";
     }
 
     /**
@@ -72,7 +79,7 @@ public class EnrollStudent {
     public String printTuition(Roster roster){
         DecimalFormat df = new DecimalFormat("##,###.00");
         Student student = roster.getStudent(profile);
-        return  student.enrollString() + ": credits enrolled: " + creditsEnrolled + " tuition due: $" + df.format(student.tuitionDue(creditsEnrolled));
+        return  student.enrollString() + " enrolled: " + creditsEnrolled + " credits: tuition due: $" + df.format(student.tuitionDue(creditsEnrolled));
     }
 
 }

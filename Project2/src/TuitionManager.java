@@ -108,10 +108,6 @@ public class TuitionManager {
                 newStudent = new International(newProfile, majorMajor, credits, isStudyAbroad);
                 break;
         }
-        if(newStudent == null){
-            System.out.println("student was never assigned!");
-            return;
-        }
         if(studentRoster.add(newStudent)){
             if(!loadingStudents){
                 System.out.println(newStudent.getProfile().toString() + " added to the roster.");
@@ -238,7 +234,7 @@ public class TuitionManager {
         try {
             creditsEnrolled = Integer.parseInt(tokens[4]);
         } catch (NumberFormatException e) {
-            System.out.println("Credits enrolled invalid: not an integer!");
+            System.out.println("Credits enrolled is not an integer!");
             return;
         }
 
@@ -259,9 +255,25 @@ public class TuitionManager {
      * This method takes the scholarship amount being awarded to a resident student and makes sure the amount is valid
      * @param tokens, that takes the profile and the amount of money awarded
      */
+    private boolean checkIfProfileExists(String[] tokens){
+        String firstName = tokens[1];
+        String lastName = tokens[2];
+        String dateOfBirth = tokens[3];
+
+        Date date = new Date(dateOfBirth);
+        Profile newProfile = new Profile(firstName, lastName, date);
+        Student newStudent = studentRoster.getStudent(newProfile);
+
+        if(newStudent == null) {
+            System.out.println(newProfile + " is not in the roster");
+            return false;
+        }
+        return true;
+    }
     public void awardScholarship(String[] tokens){
         if(tokens.length < 5){
-            System.out.println("Missing data in line command");
+            if(tokens.length == 4 && !checkIfProfileExists(tokens)){ return; }
+            System.out.println("Missing data in line command. ");
             return;
         }
         String firstName = tokens[1];
@@ -274,7 +286,6 @@ public class TuitionManager {
             System.out.println("Amount is not an integer!");
             return;
         }
-
         Date date = new Date(dateOfBirth);
         Profile newProfile = new Profile(firstName, lastName, date);
         Student newStudent = studentRoster.getStudent(newProfile);
@@ -282,20 +293,31 @@ public class TuitionManager {
         if(newStudent == null) {
             System.out.println(newProfile + " is not in the roster");
         } else if (newStudent.isResident()){
+            int PTCREDS = 12;
+            int MIN_SCHOLARSHIP = 0;
+            int MAX_SCHOLARSHIP = 10000;
             int creditsEnrolled = enrolledStudents.getEnrollStudent(newProfile).getCreditsEnrolled();
-            if(creditsEnrolled < 12){
+            if(creditsEnrolled < PTCREDS){
                 System.out.println(newProfile + " part time student is not eligible for the scholarship.");
                 return;
             }
-            if(scholarship <= 0 || scholarship > 10000){
-                System.out.println(scholarship + ": Invalid Amount");
+            if(scholarship <= MIN_SCHOLARSHIP || scholarship > MAX_SCHOLARSHIP){
+                System.out.println(scholarship + ": invalid amount.");
                 return;
             }
             Resident newResident = (Resident) newStudent;
             newResident.setScholarship(scholarship);
-            System.out.println(newProfile + " scholarship amount updated");
+            System.out.println(newProfile + ": scholarship amount updated.");
         } else {
-            System.out.println(newStudent + " is not eligible for scholarship");
+            String nameOfClass = newStudent.getClass().getName();
+            String className = switch (nameOfClass) {
+                case "NonResident" -> "Non-Resident";
+                case "Resident" -> "Resident";
+                case "TriState" -> "Tristate";
+                case "International" -> "International";
+                default -> "";
+            };
+            System.out.println(newProfile + " (" + className + ") is not eligible for scholarship.");
         }
     }
 
@@ -426,11 +448,11 @@ public class TuitionManager {
      */
     public void run() throws FileNotFoundException {
         running = true;
-        System.out.println("Roster Manager running...");
+        System.out.println("Tuition Manager running...");
         while(running){
             String command = scanner.nextLine();
             processCommand(command);
         }
-        System.out.println("Roster Manager terminated");
+        System.out.println("Tuition Manager terminated");
     }
 }

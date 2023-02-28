@@ -54,7 +54,7 @@ public class NonResident extends Student{
      * @return the string representation of profile of the non-resident
      */
     public String enrollString(){
-        return getProfile() + "(" + "Non-Resident" + ")";
+        return getProfile() + " (" + "Non-Resident" + ")";
     }
 
     /**

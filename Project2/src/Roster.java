@@ -338,5 +338,42 @@ public class Roster {
         System.out.println("* Students in " + schoolName + " **");
         System.out.println(string);
         System.out.println("* end of list **");
-    }
+    }/*
+    public static void main(String[] args){
+        Roster roster = new Roster();
+        Resident student1 = new Resident(new Profile("John", "Doe", new Date("9/2/2001")), Major.BAIT, 10);
+        Resident student2 = new Resident(new Profile("John", "Doe", new Date("9/2/2002")), Major.CS, 30);
+        Resident student3 = new Resident(new Profile("Max", "Doe", new Date("9/2/1999")), Major.ITI, 13);
+        Resident student4 = new Resident(new Profile("Luke", "Doe", new Date("9/2/1988")), Major.EE, 23);
+        Resident student5 = new Resident(new Profile("Bob", "Doe", new Date("9/2/1978")), Major.MATH, 25);
+        International student6 = new International(new Profile("Chimi", "Changa", new Date("9/2/1978")), Major.MATH, 15, true);
+        International student7 = new International(new Profile("Bob", "Dillan", new Date("9/2/1978")), Major.CS, 22, false);
+        NonResident student8 = new NonResident(new Profile("Mike", "Griffin", new Date("9/2/1978")), Major.ITI, 8);
+        NonResident student9 = new TriState(new Profile("Shmelly", "Griffin", new Date("9/2/1978")), Major.EE, 12, "NY");
+        NonResident student10 = new TriState(new Profile("Lois", "Griffin", new Date("9/2/1978")), Major.BAIT, 88, "CT");
+        roster.add(student1);
+        roster.add(student2);
+        roster.add(student3);
+        roster.add(student4);
+        roster.add(student5);
+        roster.add(student6);
+        roster.add(student7);
+        roster.add(student8);
+        roster.add(student9);
+        roster.add(student10);
+        roster.add(student10);
+        System.out.println("finished adding students. current roster: " + roster);
+        roster.remove(student10);
+        roster.remove(student10);
+        roster.remove(student9);
+        roster.remove(student8);
+        roster.remove(student7);
+        roster.remove(student6);
+        roster.remove(student5);
+        roster.remove(student4);
+        roster.remove(student3);
+        roster.remove(student2);
+        roster.remove(student1);
+        System.out.println("finished removing students. current roster: " + roster);
+    }*/
 }

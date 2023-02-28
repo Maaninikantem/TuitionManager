@@ -66,7 +66,7 @@ public class Resident extends Student{
      * @return the string form of the resident student
      */
     public String enrollString(){
-        return getProfile() + "(" + "Resident" + ")";
+        return getProfile() + " (" + "Resident" + ")";
     }
 
     /**

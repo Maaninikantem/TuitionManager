@@ -25,8 +25,9 @@ public class Enrollment {
      */
 
     public void add(EnrollStudent enrollStudent){
-        if(contains(enrollStudent)){
-            System.out.println(enrollStudent + " is already enrolled");
+        if(contains(enrollStudent.getProfile())){
+            int indexOfStudent = findProfile(enrollStudent.getProfile());
+            enrollStudents[indexOfStudent].setCreditsEnrolled(enrollStudent.getCreditsEnrolled());
             return;
         }
         int rosterIncrement = 4;
@@ -99,12 +100,12 @@ public class Enrollment {
 
     /**
      * this method uses the find method to let the user know if the student is in the list or not
-     * @param enrollStudent based on the input it searches for the student in the list
+     * @param studentProfile based on the input it searches for the student in the list
      * @return true or false based on found or not found
      */
-    public boolean contains(EnrollStudent enrollStudent){
+    public boolean contains(Profile studentProfile){
         int NOT_FOUND = -1;
-        return find(enrollStudent) != NOT_FOUND;
+        return findProfile(studentProfile) != NOT_FOUND;
     }
 
     /**
@@ -121,7 +122,7 @@ public class Enrollment {
         print += "* Enrollment **\n";
 
         for (int i = 0; i < size; i++) {
-            print += enrollStudents[i] + "\n";
+            print += enrollStudents[i].getProfile() + ": credits enrolled: " + enrollStudents[i].getCreditsEnrolled() + "\n";
         }
         System.out.print(print);
         System.out.println("* end of enrollment **");
@@ -134,7 +135,7 @@ public class Enrollment {
     public void printTuition(Roster roster) {
         String print = "";
         if (size == 0) {
-            System.out.println("Enrollment is empty!");
+            System.out.println("Student roster is empty!");
             return;
         }
 
@@ -144,7 +145,7 @@ public class Enrollment {
             print += enrollStudents[i].printTuition(roster) + "\n";
         }
         System.out.print(print);
-        System.out.println("* end of Tuition due **");
+        System.out.println("* end of tuition due **");
     }
 
     /**
@@ -177,7 +178,7 @@ public class Enrollment {
                 return;
             }
 
-            print += "* List of students eligible for Graduation **\n";
+            print += "** list of students eligible for graduation **\n";
 
             for (int i = 0; i < size; i++) {
                 EnrollStudent currEnrollStudent = enrollStudents[i];

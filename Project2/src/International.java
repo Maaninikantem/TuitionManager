@@ -28,27 +28,21 @@ public class International extends NonResident{
         double FULLTIMERATE = 29737;
         double PARTTIMEPC = 966;
         double UNIFEE = 3268;
-        double PERCENT = 0.8;
         double OVERTIME = 16;
         double FULLTIME = 12;
         double PARTTIME = 3;
         double HEALTHINS = 2650;
 
-        if(isStudyAbroad){
-            FULLTIMERATE = 0;
-            PARTTIMEPC = 0;
-        }
-
         double tuitionDue = 0;
         if(credits > OVERTIME){
             double extraCredits = credits - OVERTIME;
-            tuitionDue = FULLTIMERATE + UNIFEE + (PARTTIMEPC * extraCredits);
+            tuitionDue = FULLTIMERATE + UNIFEE + HEALTHINS + (PARTTIMEPC * extraCredits);
         }else if(credits >= FULLTIME){
-            tuitionDue = FULLTIMERATE + UNIFEE;
+            tuitionDue = FULLTIMERATE + UNIFEE + HEALTHINS;
         }else if(credits >= PARTTIME){
-            tuitionDue = (credits * PARTTIMEPC) + (PERCENT * UNIFEE);
+            tuitionDue = UNIFEE + HEALTHINS;
         }
-        return tuitionDue + HEALTHINS;
+        return tuitionDue;
     }
 
     /**
@@ -84,7 +78,7 @@ public class International extends NonResident{
         if(isStudyAbroad){
             studyAbroad = "study abroad";
         }
-        return getProfile() + "(" + "International student" + studyAbroad +")";
+        return getProfile() + " (" + "International student" + studyAbroad +")";
     }
 
     /**

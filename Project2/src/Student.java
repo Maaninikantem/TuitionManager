@@ -29,7 +29,7 @@ public abstract class Student implements Comparable<Student> {
         if(creditsEnrolled >= 3 && creditsEnrolled <= 24){
             return true;
         }
-        System.out.println("(" + errorClassName + ") " + creditsEnrolled +": invalid credits hours.");
+        System.out.println("(" + errorClassName + ") " + creditsEnrolled +": invalid credit hours.");
         return false;
     }
     public abstract double tuitionDue(int creditsEnrolled); //polymorphism

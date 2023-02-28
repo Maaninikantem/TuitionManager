@@ -27,6 +27,7 @@ public class TriState extends NonResident {
         double PARTTIME = 3;
         double discount = 0;
 
+
         if(state.equals("NY")){
             discount = 4000;
         } else if(state.equals("CT")){
@@ -36,13 +37,13 @@ public class TriState extends NonResident {
         double tuitionDue = 0;
         if(credits > OVERTIME){
             double extraCredits = credits - OVERTIME;
-            tuitionDue = FULLTIMERATE + UNIFEE + (PARTTIMEPC * extraCredits);
+            tuitionDue = FULLTIMERATE + UNIFEE + (PARTTIMEPC * extraCredits) - discount;
         }else if(credits >= FULLTIME){
-            tuitionDue = FULLTIMERATE + UNIFEE;
+            tuitionDue = FULLTIMERATE + UNIFEE - discount;
         }else if(credits >= PARTTIME){
             tuitionDue = (credits * PARTTIMEPC) + (PERCENT * UNIFEE);
         }
-        return tuitionDue - discount;
+        return tuitionDue;
     }
 
     /**
@@ -70,6 +71,6 @@ public class TriState extends NonResident {
      * @return profile of the tri-state student and the state they're from
      */
     public String enrollString(){
-        return getProfile() + "(" + "Tristate" + state +")";
+        return getProfile() + " (" + "Tri-state " + state +")";
     }
 }
